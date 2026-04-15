@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dotnet --version)",
+      "Bash('/c/Program Files/dotnet/dotnet.exe' --list-sdks)",
+      "Bash('/c/Program Files/dotnet/dotnet.exe' --version)",
+      "Bash('/c/Program Files/dotnet/dotnet.exe' --info)",
+      "Read(//c/Program Files/dotnet/**)",
+      "Read(//c/Program Files \\(x86\\)/dotnet/**)",
+      "Bash(winget list:*)",
+      "Bash(curl -sL https://dot.net/v1/dotnet-install.ps1 -o /tmp/dotnet-install.ps1)",
+      "Bash(powershell.exe -ExecutionPolicy Bypass -File /tmp/dotnet-install.ps1 -Channel 8.0 -InstallDir \"C:/Program Files/dotnet\")",
+      "Bash(curl -sL https://dot.net/v1/dotnet-install.sh -o /tmp/dotnet-install.sh)",
+      "Bash(chmod +x /tmp/dotnet-install.sh)",
+      "Bash(/tmp/dotnet-install.sh --channel 8.0 --install-dir \"$HOME/.dotnet\")",
+      "Bash(powershell.exe -ExecutionPolicy Bypass -Command \"& { [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; Invoke-WebRequest -Uri ''''https://dot.net/v1/dotnet-install.ps1'''' -OutFile ''''C:\\\\Users\\\\Alperen\\\\dotnet-install.ps1'''' }\")",
+      "Bash(powershell.exe -ExecutionPolicy Bypass -Command \"& { & ''''C:\\\\Users\\\\Alperen\\\\dotnet-install.ps1'''' -Channel 8.0 }\")",
+      "Bash(export PATH=\"$HOME/AppData/Local/Microsoft/dotnet:$PATH\")",
+      "Bash(dotnet restore:*)",
+      "Bash(dotnet build:*)",
+      "Bash(dotnet publish:*)",
+      "Bash(export PATH=\"$LOCALAPPDATA/Microsoft/dotnet:$PATH\")"
+    ]
+  }
+}
