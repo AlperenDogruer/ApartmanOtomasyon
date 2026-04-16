@@ -19,7 +19,8 @@
       "Bash(dotnet restore:*)",
       "Bash(dotnet build:*)",
       "Bash(dotnet publish:*)",
-      "Bash(export PATH=\"$LOCALAPPDATA/Microsoft/dotnet:$PATH\")"
+      "Bash(export PATH=\"$LOCALAPPDATA/Microsoft/dotnet:$PATH\")",
+      "Bash(export PATH=\"$PATH:/usr/local/share/dotnet\")"
     ]
   }
 }

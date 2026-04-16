@@ -1,0 +1,64 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:SiteYonetim.UI.Avalonia.ViewModels"
+        x:Class="SiteYonetim.UI.Avalonia.Views.SetupWizardWindow"
+        x:DataType="vm:SetupWizardViewModel"
+        Title="Kurulum Sihirbazı"
+        Width="520" Height="420"
+        CanResize="False"
+        WindowStartupLocation="CenterScreen"
+        Background="White">
+
+    <DockPanel LastChildFill="True">
+        <!-- Header -->
+        <Border DockPanel.Dock="Top" Height="70" Background="#1E3A5F" Padding="20,10">
+            <StackPanel>
+                <TextBlock Text="Site Yönetim Kurulum Sihirbazı"
+                           Foreground="White" FontSize="18" FontWeight="Bold"/>
+                <TextBlock Text="{Binding AdimText}" Foreground="#2E86AB"
+                           FontSize="11" Margin="0,4,0,0"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Footer buttons -->
+        <Border DockPanel.Dock="Bottom" Height="70" Padding="20,15">
+            <Grid ColumnDefinitions="*,Auto,Auto,Auto" >
+                <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                    <TextBlock Text="{Binding HataMesaji}" Foreground="#E74C3C" FontSize="11"/>
+                </StackPanel>
+                <Button Grid.Column="1" Content="&lt; Geri" Width="100" Height="36"
+                        Margin="0,0,8,0"
+                        IsVisible="{Binding GeriVisible}"
+                        Command="{Binding GeriCommand}"/>
+                <Button Grid.Column="2" Content="İleri &gt;" Width="100" Height="36"
+                        Margin="0,0,8,0"
+                        IsVisible="{Binding IleriVisible}"
+                        Background="#2E86AB" Foreground="White" FontWeight="Bold"
+                        Command="{Binding IleriCommand}"/>
+                <Button Grid.Column="3" Content="Tamamla" Width="120" Height="36"
+                        IsVisible="{Binding TamamlaVisible}"
+                        Background="#27AE60" Foreground="White" FontWeight="Bold"
+                        Command="{Binding TamamlaCommand}"/>
+            </Grid>
+        </Border>
+
+        <!-- Content -->
+        <Grid Margin="40,30">
+            <StackPanel IsVisible="{Binding Step1Visible}" Spacing="10">
+                <TextBlock Text="Site / Apartman Adı:" FontSize="13" FontWeight="Bold" Foreground="#1E3A5F"/>
+                <TextBox Text="{Binding SiteAdi, Mode=TwoWay}" Watermark="Örneğin: Yeşil Vadi Sitesi" FontSize="13"/>
+                <TextBlock Text="Site veya apartmanınızın adını giriniz."
+                           Foreground="Gray" FontSize="11"/>
+            </StackPanel>
+
+            <StackPanel IsVisible="{Binding Step2Visible}" Spacing="10">
+                <TextBlock Text="Yönetici Adı Soyadı:" FontSize="13" FontWeight="Bold" Foreground="#1E3A5F"/>
+                <TextBox Text="{Binding YoneticiAdi, Mode=TwoWay}" Watermark="Örneğin: Ahmet Yılmaz" FontSize="13"/>
+                <TextBlock Text="Site yöneticisinin ad ve soyadını giriniz."
+                           Foreground="Gray" FontSize="11"/>
+                <TextBlock Text="Tamamlandığında örnek veri oluşturulur: 2 blok, 6 daire, 1 aidat tipi."
+                           Foreground="Gray" FontSize="10" Margin="0,15,0,0" TextWrapping="Wrap"/>
+            </StackPanel>
+        </Grid>
+    </DockPanel>
+</Window>

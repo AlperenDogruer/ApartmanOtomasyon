@@ -1,0 +1,85 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:SiteYonetim.UI.Avalonia.ViewModels"
+             x:Class="SiteYonetim.UI.Avalonia.Views.DaireView"
+             x:DataType="vm:DaireViewModel">
+
+    <DockPanel LastChildFill="True">
+        <Border DockPanel.Dock="Top" Background="White" Padding="10,8">
+            <StackPanel Orientation="Horizontal" Spacing="8">
+                <Button Content="+ Blok Ekle" Background="#2E86AB" Foreground="White" Command="{Binding BlokEkleCommand}"/>
+                <Button Content="+ Daire Ekle" Background="#2E86AB" Foreground="White" Command="{Binding DaireEkleCommand}"/>
+                <Button Content="✎ Düzenle" Background="#F39C12" Foreground="White" Command="{Binding DuzenleCommand}"/>
+                <Button Content="🗑 Sil" Background="#E74C3C" Foreground="White" Command="{Binding SilCommand}"/>
+            </StackPanel>
+        </Border>
+
+        <Grid ColumnDefinitions="260,*">
+            <!-- Tree -->
+            <Border Grid.Column="0" Background="White" BorderBrush="#E5E7EB" BorderThickness="0,0,1,0">
+                <TreeView ItemsSource="{Binding Bloklar}"
+                          SelectedItem="{Binding SelectedNode, Mode=TwoWay}">
+                    <TreeView.DataTemplates>
+                        <TreeDataTemplate DataType="vm:BlokNode" ItemsSource="{Binding Children}">
+                            <TextBlock Text="{Binding Ad}" FontWeight="Bold"/>
+                        </TreeDataTemplate>
+                        <TreeDataTemplate DataType="vm:DaireNode">
+                            <TextBlock Text="{Binding Ad}"/>
+                        </TreeDataTemplate>
+                    </TreeView.DataTemplates>
+                </TreeView>
+            </Border>
+
+            <!-- Tabs -->
+            <TabControl Grid.Column="1" Margin="5,0,0,0">
+                <TabItem Header="Daire Bilgileri">
+                    <StackPanel Margin="20" Spacing="10">
+                        <Grid ColumnDefinitions="120,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto">
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Daire No:" FontWeight="Bold" Margin="0,5"/>
+                            <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding DaireNoText}" Margin="0,5"/>
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Kat:" FontWeight="Bold" Margin="0,5"/>
+                            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding KatText}" Margin="0,5"/>
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Blok:" FontWeight="Bold" Margin="0,5"/>
+                            <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding BlokText}" Margin="0,5"/>
+                            <TextBlock Grid.Row="3" Grid.Column="0" Text="Arsa Payı:" FontWeight="Bold" Margin="0,5"/>
+                            <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding ArsaPayiText}" Margin="0,5"/>
+                            <TextBlock Grid.Row="4" Grid.Column="0" Text="Tip:" FontWeight="Bold" Margin="0,5"/>
+                            <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding TipText}" Margin="0,5"/>
+                        </Grid>
+                    </StackPanel>
+                </TabItem>
+
+                <TabItem Header="Sakinler">
+                    <DockPanel LastChildFill="True">
+                        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Spacing="8" Margin="10,8">
+                            <Button Content="Sakin Ekle" Background="#2E86AB" Foreground="White" Command="{Binding SakinEkleCommand}"/>
+                            <Button Content="Çıkış Yaptır" Background="#E74C3C" Foreground="White" Command="{Binding SakinCikisCommand}"/>
+                        </StackPanel>
+                        <DataGrid ItemsSource="{Binding Sakinler}" SelectedItem="{Binding SelectedSakin, Mode=TwoWay}" IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Adı Soyadı" Binding="{Binding AdSoyad}" Width="*"/>
+                                <DataGridTextColumn Header="Tip" Binding="{Binding Tip}" Width="100"/>
+                                <DataGridTextColumn Header="Telefon" Binding="{Binding Telefon}" Width="140"/>
+                                <DataGridTextColumn Header="Giriş Tarihi" Binding="{Binding GirisTarihi}" Width="110"/>
+                                <DataGridTextColumn Header="Durum" Binding="{Binding Durum}" Width="80"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </DockPanel>
+                </TabItem>
+
+                <TabItem Header="Aidat Geçmişi">
+                    <DataGrid ItemsSource="{Binding AidatGecmisi}" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Dönem" Binding="{Binding Donem}" Width="90"/>
+                            <DataGridTextColumn Header="Aidat Tipi" Binding="{Binding AidatTipi}" Width="*"/>
+                            <DataGridTextColumn Header="Tahakkuk" Binding="{Binding Tahakkuk, StringFormat='₺{0:#,##0.00}'}" Width="120"/>
+                            <DataGridTextColumn Header="Ödenen" Binding="{Binding Odenen, StringFormat='₺{0:#,##0.00}'}" Width="120"/>
+                            <DataGridTextColumn Header="Kalan" Binding="{Binding Kalan, StringFormat='₺{0:#,##0.00}'}" Width="120"/>
+                            <DataGridTextColumn Header="Ödeme Tarihi" Binding="{Binding OdemeTarihi}" Width="120"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </TabItem>
+            </TabControl>
+        </Grid>
+    </DockPanel>
+</UserControl>

@@ -1,0 +1,27 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:SiteYonetim.UI.Avalonia.ViewModels"
+             x:Class="SiteYonetim.UI.Avalonia.Views.SakinView"
+             x:DataType="vm:SakinViewModel">
+    <DockPanel LastChildFill="True">
+        <Border DockPanel.Dock="Top" Background="White" Padding="10,8">
+            <StackPanel Orientation="Horizontal" Spacing="8">
+                <TextBox Text="{Binding Arama, Mode=TwoWay}" Watermark="Ad/Soyad veya Daire No ile ara..." Width="300"/>
+                <Button Content="+ Sakin Ekle" Background="#2E86AB" Foreground="White" Command="{Binding EkleCommand}"/>
+                <Button Content="✎ Düzenle" Background="#F39C12" Foreground="White" Command="{Binding DuzenleCommand}"/>
+                <Button Content="Çıkış Yaptır" Background="#E74C3C" Foreground="White" Command="{Binding CikisCommand}"/>
+            </StackPanel>
+        </Border>
+        <DataGrid ItemsSource="{Binding Sakinler}" SelectedItem="{Binding SelectedSakin, Mode=TwoWay}" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Adı Soyadı" Binding="{Binding AdSoyad}" Width="2*"/>
+                <DataGridTextColumn Header="Daire" Binding="{Binding DaireNo}" Width="80"/>
+                <DataGridTextColumn Header="Blok" Binding="{Binding Blok}" Width="100"/>
+                <DataGridTextColumn Header="Tip" Binding="{Binding Tip}" Width="90"/>
+                <DataGridTextColumn Header="Telefon" Binding="{Binding Telefon}" Width="140"/>
+                <DataGridTextColumn Header="Giriş Tarihi" Binding="{Binding GirisTarihi}" Width="110"/>
+                <DataGridTextColumn Header="Durum" Binding="{Binding Durum}" Width="80"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </DockPanel>
+</UserControl>

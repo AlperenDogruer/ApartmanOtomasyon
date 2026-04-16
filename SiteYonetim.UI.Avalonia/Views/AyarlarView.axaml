@@ -1,0 +1,83 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:SiteYonetim.UI.Avalonia.ViewModels"
+             x:Class="SiteYonetim.UI.Avalonia.Views.AyarlarView"
+             x:DataType="vm:AyarlarViewModel">
+
+    <ScrollViewer>
+        <StackPanel Spacing="15" Margin="5">
+
+            <!-- Site Bilgileri -->
+            <Border Background="White" CornerRadius="4" Padding="15">
+                <StackPanel Spacing="10">
+                    <TextBlock Text="Site Bilgileri" FontSize="14" FontWeight="Bold" Foreground="#1E3A5F"/>
+                    <Grid ColumnDefinitions="140,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto" ShowGridLines="False">
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Site Adı:" VerticalAlignment="Center" Margin="0,3"/>
+                        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding SiteAdi, Mode=TwoWay}" Margin="0,3"/>
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Adres:" VerticalAlignment="Center" Margin="0,3"/>
+                        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Adres, Mode=TwoWay}" Margin="0,3"/>
+                        <TextBlock Grid.Row="2" Grid.Column="0" Text="Yönetici Adı:" VerticalAlignment="Center" Margin="0,3"/>
+                        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding YoneticiAdi, Mode=TwoWay}" Margin="0,3"/>
+                        <TextBlock Grid.Row="3" Grid.Column="0" Text="Yönetici Telefon:" VerticalAlignment="Center" Margin="0,3"/>
+                        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding YoneticiTelefon, Mode=TwoWay}" Margin="0,3"/>
+                        <Button Grid.Row="4" Grid.Column="1" Content="Kaydet" Width="100" HorizontalAlignment="Left"
+                                Background="#2E86AB" Foreground="White" Margin="0,8,0,0"
+                                Command="{Binding SiteBilgileriKaydetCommand}"/>
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+            <!-- Aidat Tipleri -->
+            <Border Background="White" CornerRadius="4" Padding="15">
+                <StackPanel Spacing="10">
+                    <TextBlock Text="Aidat Tipleri" FontSize="14" FontWeight="Bold" Foreground="#1E3A5F"/>
+                    <DataGrid ItemsSource="{Binding AidatTipleri}"
+                              SelectedItem="{Binding SelectedAidatTipi, Mode=TwoWay}"
+                              IsReadOnly="True" Height="200"
+                              HeadersVisibility="Column" GridLinesVisibility="Horizontal">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Ad" Binding="{Binding Ad}" Width="*"/>
+                            <DataGridTextColumn Header="Açıklama" Binding="{Binding Aciklama}" Width="2*"/>
+                            <DataGridTextColumn Header="Aktif" Binding="{Binding AktifText}" Width="80"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <Button Content="Ekle" Background="#2E86AB" Foreground="White"
+                                Command="{Binding AidatTipiEkleCommand}"/>
+                        <Button Content="Düzenle" Background="#F39C12" Foreground="White"
+                                Command="{Binding AidatTipiDuzenleCommand}"/>
+                        <Button Content="Aktif/Pasif Yap" Background="Gray" Foreground="White"
+                                Command="{Binding AidatTipiAktifPasifCommand}"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- Gecikme Tazminatı -->
+            <Border Background="White" CornerRadius="4" Padding="15">
+                <StackPanel Spacing="10">
+                    <TextBlock Text="Gecikme Tazminatı" FontSize="14" FontWeight="Bold" Foreground="#1E3A5F"/>
+                    <StackPanel Orientation="Horizontal" Spacing="10">
+                        <TextBlock Text="Aylık faiz oranı (%):" VerticalAlignment="Center"/>
+                        <NumericUpDown Value="{Binding FaizOrani, Mode=TwoWay}" Minimum="0" Maximum="100" Increment="0.5" Width="120"/>
+                        <TextBlock Text="Son ödeme günü (0=ay sonu):" VerticalAlignment="Center" Margin="15,0,0,0"/>
+                        <NumericUpDown Value="{Binding SonOdemeGunu, Mode=TwoWay}" Minimum="0" Maximum="31" Width="100"/>
+                        <Button Content="Kaydet" Background="#2E86AB" Foreground="White" Margin="15,0,0,0"
+                                Command="{Binding GecikmeKaydetCommand}"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- Yedekleme -->
+            <Border Background="White" CornerRadius="4" Padding="15">
+                <StackPanel Spacing="10">
+                    <TextBlock Text="Yedekleme" FontSize="14" FontWeight="Bold" Foreground="#1E3A5F"/>
+                    <StackPanel Orientation="Horizontal" Spacing="15">
+                        <Button Content="Veritabanını Yedekle" Background="#2E86AB" Foreground="White"
+                                Command="{Binding YedekleCommand}"/>
+                        <TextBlock Text="{Binding SonYedekText}" Foreground="Gray" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

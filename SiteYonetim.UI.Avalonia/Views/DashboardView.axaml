@@ -1,0 +1,90 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:SiteYonetim.UI.Avalonia.ViewModels"
+             x:Class="SiteYonetim.UI.Avalonia.Views.DashboardView"
+             x:DataType="vm:DashboardViewModel">
+
+    <DockPanel LastChildFill="True" Background="#F0F4F8">
+
+        <!-- Summary cards -->
+        <ItemsControl DockPanel.Dock="Top" Margin="0,0,0,15">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="4"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+
+            <!-- Card: Tahakkuk -->
+            <Border Background="White" Margin="4" CornerRadius="4">
+                <DockPanel LastChildFill="True">
+                    <Border DockPanel.Dock="Top" Height="3" Background="#2E86AB"/>
+                    <StackPanel Margin="15,10">
+                        <TextBlock Text="Bu Ay Tahakkuk" Foreground="Gray" FontSize="11"/>
+                        <TextBlock Text="{Binding TahakkukText}" Foreground="#2E86AB"
+                                   FontSize="22" FontWeight="Bold" Margin="0,5,0,0"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <!-- Card: Tahsilat -->
+            <Border Background="White" Margin="4" CornerRadius="4">
+                <DockPanel LastChildFill="True">
+                    <Border DockPanel.Dock="Top" Height="3" Background="#27AE60"/>
+                    <StackPanel Margin="15,10">
+                        <TextBlock Text="Bu Ay Tahsilat" Foreground="Gray" FontSize="11"/>
+                        <TextBlock Text="{Binding TahsilatText}" Foreground="#27AE60"
+                                   FontSize="22" FontWeight="Bold" Margin="0,5,0,0"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <!-- Card: Borçlu -->
+            <Border Background="White" Margin="4" CornerRadius="4">
+                <DockPanel LastChildFill="True">
+                    <Border DockPanel.Dock="Top" Height="3" Background="#F39C12"/>
+                    <StackPanel Margin="15,10">
+                        <TextBlock Text="Borçlu Daire" Foreground="Gray" FontSize="11"/>
+                        <TextBlock Text="{Binding BorcluCount}" Foreground="#F39C12"
+                                   FontSize="22" FontWeight="Bold" Margin="0,5,0,0"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <!-- Card: Kasa -->
+            <Border Background="White" Margin="4" CornerRadius="4">
+                <DockPanel LastChildFill="True">
+                    <Border DockPanel.Dock="Top" Height="3" Background="#1E3A5F"/>
+                    <StackPanel Margin="15,10">
+                        <TextBlock Text="Kasa Bakiyesi" Foreground="Gray" FontSize="11"/>
+                        <TextBlock Text="{Binding KasaText}" Foreground="{Binding KasaBrush}"
+                                   FontSize="22" FontWeight="Bold" Margin="0,5,0,0"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+        </ItemsControl>
+
+        <!-- Title -->
+        <TextBlock DockPanel.Dock="Top" Text="Bu Ay Borçlu Daireler"
+                   FontSize="15" FontWeight="Bold" Foreground="#1E3A5F"
+                   Margin="5,5,5,8"/>
+
+        <!-- Debtors grid -->
+        <Border Background="White" CornerRadius="4">
+            <DataGrid ItemsSource="{Binding Borclular}"
+                      IsReadOnly="True"
+                      GridLinesVisibility="Horizontal"
+                      CanUserReorderColumns="False"
+                      HeadersVisibility="Column"
+                      Background="White">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Blok" Binding="{Binding BlokAd}" Width="80"/>
+                    <DataGridTextColumn Header="Daire No" Binding="{Binding DaireNo}" Width="100"/>
+                    <DataGridTextColumn Header="Sakin Adı" Binding="{Binding SakinAd}" Width="*"/>
+                    <DataGridTextColumn Header="Borç Tutarı" Binding="{Binding BorcTutari, StringFormat='₺{0:#,##0.00}'}" Width="150"/>
+                    <DataGridTextColumn Header="Durum" Binding="{Binding Durum}" Width="140"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+
+    </DockPanel>
+</UserControl>

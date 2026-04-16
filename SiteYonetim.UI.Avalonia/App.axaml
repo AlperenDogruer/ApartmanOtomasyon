@@ -1,0 +1,23 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:SiteYonetim.UI.Avalonia.ViewModels"
+             xmlns:views="using:SiteYonetim.UI.Avalonia.Views"
+             x:Class="SiteYonetim.UI.Avalonia.App"
+             RequestedThemeVariant="Light">
+
+    <Application.DataTemplates>
+        <DataTemplate DataType="vm:DashboardViewModel"><views:DashboardView/></DataTemplate>
+        <DataTemplate DataType="vm:PlaceholderViewModel"><views:PlaceholderView/></DataTemplate>
+        <DataTemplate DataType="vm:AyarlarViewModel"><views:AyarlarView/></DataTemplate>
+        <DataTemplate DataType="vm:DaireViewModel"><views:DaireView/></DataTemplate>
+        <DataTemplate DataType="vm:SakinViewModel"><views:SakinView/></DataTemplate>
+        <DataTemplate DataType="vm:AidatViewModel"><views:AidatView/></DataTemplate>
+        <DataTemplate DataType="vm:GelirGiderViewModel"><views:GelirGiderView/></DataTemplate>
+        <DataTemplate DataType="vm:RaporlarViewModel"><views:RaporlarView/></DataTemplate>
+    </Application.DataTemplates>
+
+    <Application.Styles>
+        <FluentTheme />
+        <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/>
+    </Application.Styles>
+</Application>

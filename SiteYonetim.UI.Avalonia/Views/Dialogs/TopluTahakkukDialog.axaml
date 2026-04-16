@@ -1,0 +1,33 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:SiteYonetim.UI.Avalonia.ViewModels.Dialogs"
+        x:Class="SiteYonetim.UI.Avalonia.Views.Dialogs.TopluTahakkukDialog"
+        x:DataType="vm:TopluTahakkukDialogViewModel"
+        Title="Toplu Tahakkuk Oluştur" Width="500" Height="440" CanResize="False"
+        WindowStartupLocation="CenterOwner" Background="White">
+    <DockPanel>
+        <Border DockPanel.Dock="Top" Height="50" Background="#1E3A5F" Padding="15,10">
+            <TextBlock Text="Toplu Tahakkuk Oluştur" Foreground="White" FontSize="16" FontWeight="Bold"/>
+        </Border>
+        <Border DockPanel.Dock="Bottom" Padding="15,10">
+            <Grid ColumnDefinitions="*,Auto,Auto">
+                <TextBlock Grid.Column="0" Text="{Binding Hata}" Foreground="#E74C3C" VerticalAlignment="Center"/>
+                <Button Grid.Column="1" Content="İptal" Width="80" Margin="0,0,8,0" Command="{Binding IptalCommand}"/>
+                <Button Grid.Column="2" Content="Oluştur" Width="120" Background="#2E86AB" Foreground="White" FontWeight="Bold" Command="{Binding OlusturCommand}"/>
+            </Grid>
+        </Border>
+        <Grid Margin="20" ColumnDefinitions="140,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto">
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="Yıl:" FontWeight="Bold" Foreground="#1E3A5F" VerticalAlignment="Center" Margin="0,5"/>
+            <NumericUpDown Grid.Row="0" Grid.Column="1" Value="{Binding Yil, Mode=TwoWay}" Minimum="2020" Maximum="2050" Margin="0,5"/>
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="Ay:" FontWeight="Bold" Foreground="#1E3A5F" VerticalAlignment="Center" Margin="0,5"/>
+            <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding AylarList}" SelectedIndex="{Binding AyIndex, Mode=TwoWay}" HorizontalAlignment="Stretch" Margin="0,5"/>
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="Aidat Tipi:" FontWeight="Bold" Foreground="#1E3A5F" VerticalAlignment="Center" Margin="0,5"/>
+            <ComboBox Grid.Row="2" Grid.Column="1" ItemsSource="{Binding AidatTipleri}" SelectedItem="{Binding SelectedAidatTipi, Mode=TwoWay}" HorizontalAlignment="Stretch" Margin="0,5">
+                <ComboBox.ItemTemplate><DataTemplate><TextBlock Text="{Binding Ad}"/></DataTemplate></ComboBox.ItemTemplate>
+            </ComboBox>
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="Birim Tutar (₺):" FontWeight="Bold" Foreground="#1E3A5F" VerticalAlignment="Center" Margin="0,5"/>
+            <NumericUpDown Grid.Row="3" Grid.Column="1" Value="{Binding BirimTutar, Mode=TwoWay}" Minimum="0" Maximum="100000" Increment="50" Margin="0,5"/>
+            <TextBlock Grid.Row="4" Grid.ColumnSpan="2" Text="{Binding DaireSayisiText}" Foreground="#2E86AB" FontStyle="Italic" Margin="0,15,0,0"/>
+        </Grid>
+    </DockPanel>
+</Window>

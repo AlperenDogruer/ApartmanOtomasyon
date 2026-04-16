@@ -1,0 +1,102 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:SiteYonetim.UI.Avalonia.ViewModels"
+        x:Class="SiteYonetim.UI.Avalonia.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Title="Site Yönetim Otomasyon"
+        Width="1280" Height="800"
+        MinWidth="1024" MinHeight="700"
+        WindowStartupLocation="CenterScreen"
+        Background="#F0F4F8">
+
+    <Window.Styles>
+        <Style Selector="Button.menu">
+            <Setter Property="Background" Value="#1E3A5F"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="15,0"/>
+            <Setter Property="Height" Value="45"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="CornerRadius" Value="0"/>
+        </Style>
+        <Style Selector="Button.menu:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="#2E86AB"/>
+            <Setter Property="TextBlock.Foreground" Value="White"/>
+        </Style>
+        <Style Selector="Button.menu.active /template/ ContentPresenter">
+            <Setter Property="Background" Value="#2E86AB"/>
+        </Style>
+        <Style Selector="Button.menu.active">
+            <Setter Property="Background" Value="#2E86AB"/>
+        </Style>
+    </Window.Styles>
+
+    <Grid ColumnDefinitions="220,*" RowDefinitions="*,28">
+
+        <!-- Sidebar -->
+        <Border Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Background="#1E3A5F">
+            <DockPanel LastChildFill="True">
+                <Border DockPanel.Dock="Top" Height="60" Padding="10"
+                        BorderBrush="#2E86AB" BorderThickness="0,0,0,1">
+                    <TextBlock Text="🏢 Site Yönetim"
+                               Foreground="White"
+                               FontSize="16" FontWeight="Bold"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
+                </Border>
+
+                <ItemsControl ItemsSource="{Binding MenuItems}" Margin="0,10,0,0">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="vm:MenuItemVm">
+                            <Button Classes="menu"
+                                    Classes.active="{Binding IsActive}"
+                                    Command="{Binding $parent[Window].((vm:MainWindowViewModel)DataContext).SelectMenuCommand}"
+                                    CommandParameter="{Binding}"
+                                    Cursor="Hand">
+                                <StackPanel Orientation="Horizontal" Spacing="10">
+                                    <TextBlock Text="{Binding Icon}" FontSize="16"/>
+                                    <TextBlock Text="{Binding Text}" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </Button>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </DockPanel>
+        </Border>
+
+        <!-- Main content area -->
+        <DockPanel Grid.Column="1" Grid.Row="0" LastChildFill="True">
+            <!-- Top bar -->
+            <Border DockPanel.Dock="Top" Height="50" Background="White"
+                    BorderBrush="#2E86AB" BorderThickness="0,0,0,2" Padding="15,0">
+                <Grid ColumnDefinitions="*,Auto">
+                    <TextBlock Grid.Column="0" Text="{Binding SiteAdi}"
+                               FontSize="15" FontWeight="Bold" Foreground="#1E3A5F"
+                               VerticalAlignment="Center"/>
+                    <TextBlock Grid.Column="1" Text="{Binding Tarih}"
+                               FontSize="12" Foreground="Gray"
+                               VerticalAlignment="Center"/>
+                </Grid>
+            </Border>
+
+            <!-- Content -->
+            <ContentControl Content="{Binding CurrentView}" Padding="15" Background="#F0F4F8"/>
+        </DockPanel>
+
+        <!-- Status bar -->
+        <Border Grid.Column="1" Grid.Row="1" Background="#1E3A5F">
+            <Grid ColumnDefinitions="*,Auto" Margin="15,0">
+                <TextBlock Grid.Column="0" Text="{Binding KasaText}"
+                           Foreground="{Binding KasaBrush}"
+                           FontWeight="Bold" FontSize="11"
+                           VerticalAlignment="Center"/>
+                <TextBlock Grid.Column="1" Text="{Binding BorcluText}"
+                           Foreground="#F39C12"
+                           FontWeight="Bold" FontSize="11"
+                           VerticalAlignment="Center"/>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

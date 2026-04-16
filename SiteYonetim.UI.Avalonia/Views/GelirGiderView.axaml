@@ -1,0 +1,114 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:SiteYonetim.UI.Avalonia.ViewModels"
+             x:Class="SiteYonetim.UI.Avalonia.Views.GelirGiderView"
+             x:DataType="vm:GelirGiderViewModel">
+    <TabControl>
+        <TabItem Header="Gelirler">
+            <DockPanel LastChildFill="True">
+                <Border DockPanel.Dock="Top" Padding="10,8" Background="White">
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <TextBlock Text="Baş:" VerticalAlignment="Center"/>
+                        <DatePicker SelectedDate="{Binding GelirBas, Mode=TwoWay}"/>
+                        <TextBlock Text="Bit:" VerticalAlignment="Center"/>
+                        <DatePicker SelectedDate="{Binding GelirBit, Mode=TwoWay}"/>
+                        <TextBlock Text="Kategori:" VerticalAlignment="Center"/>
+                        <ComboBox ItemsSource="{Binding GelirKategoriList}" SelectedItem="{Binding GelirKategori, Mode=TwoWay}" Width="140"/>
+                        <Button Content="Filtrele" Background="#2E86AB" Foreground="White" Command="{Binding LoadGelirlerCommand}"/>
+                    </StackPanel>
+                </Border>
+                <Border DockPanel.Dock="Bottom" Padding="10,8" Background="White">
+                    <DockPanel LastChildFill="False">
+                        <StackPanel Orientation="Horizontal" Spacing="8" DockPanel.Dock="Left">
+                            <Button Content="+ Gelir Ekle" Background="#2E86AB" Foreground="White" Command="{Binding GelirEkleCommand}"/>
+                            <Button Content="✎ Düzenle" Background="#F39C12" Foreground="White" Command="{Binding GelirDuzenleCommand}"/>
+                            <Button Content="🗑 Sil" Background="#E74C3C" Foreground="White" Command="{Binding GelirSilCommand}"/>
+                        </StackPanel>
+                        <TextBlock DockPanel.Dock="Right" Text="{Binding GelirToplamText}" FontWeight="Bold" Foreground="#27AE60" FontSize="14" VerticalAlignment="Center"/>
+                    </DockPanel>
+                </Border>
+                <DataGrid ItemsSource="{Binding Gelirler}" SelectedItem="{Binding SelectedGelir, Mode=TwoWay}" IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Tarih" Binding="{Binding Tarih, StringFormat=\{0:dd.MM.yyyy\}}" Width="110"/>
+                        <DataGridTextColumn Header="Açıklama" Binding="{Binding Aciklama}" Width="2*"/>
+                        <DataGridTextColumn Header="Kategori" Binding="{Binding Kategori}" Width="120"/>
+                        <DataGridTextColumn Header="Tutar" Binding="{Binding Tutar, StringFormat='₺{0:#,##0.00}'}" Width="120"/>
+                        <DataGridTextColumn Header="Ödeme Tipi" Binding="{Binding OdemeTipi}" Width="110"/>
+                        <DataGridTextColumn Header="Belge No" Binding="{Binding BelgeNo}" Width="120"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </DockPanel>
+        </TabItem>
+
+        <TabItem Header="Giderler">
+            <DockPanel LastChildFill="True">
+                <Border DockPanel.Dock="Top" Padding="10,8" Background="White">
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <TextBlock Text="Baş:" VerticalAlignment="Center"/>
+                        <DatePicker SelectedDate="{Binding GiderBas, Mode=TwoWay}"/>
+                        <TextBlock Text="Bit:" VerticalAlignment="Center"/>
+                        <DatePicker SelectedDate="{Binding GiderBit, Mode=TwoWay}"/>
+                        <TextBlock Text="Kategori:" VerticalAlignment="Center"/>
+                        <ComboBox ItemsSource="{Binding GiderKategoriList}" SelectedItem="{Binding GiderKategori, Mode=TwoWay}" Width="140"/>
+                        <Button Content="Filtrele" Background="#2E86AB" Foreground="White" Command="{Binding LoadGiderlerCommand}"/>
+                    </StackPanel>
+                </Border>
+                <Border DockPanel.Dock="Bottom" Padding="10,8" Background="White">
+                    <DockPanel LastChildFill="False">
+                        <StackPanel Orientation="Horizontal" Spacing="8" DockPanel.Dock="Left">
+                            <Button Content="+ Gider Ekle" Background="#2E86AB" Foreground="White" Command="{Binding GiderEkleCommand}"/>
+                            <Button Content="✎ Düzenle" Background="#F39C12" Foreground="White" Command="{Binding GiderDuzenleCommand}"/>
+                            <Button Content="🗑 Sil" Background="#E74C3C" Foreground="White" Command="{Binding GiderSilCommand}"/>
+                        </StackPanel>
+                        <TextBlock DockPanel.Dock="Right" Text="{Binding GiderToplamText}" FontWeight="Bold" Foreground="#E74C3C" FontSize="14" VerticalAlignment="Center"/>
+                    </DockPanel>
+                </Border>
+                <DataGrid ItemsSource="{Binding Giderler}" SelectedItem="{Binding SelectedGider, Mode=TwoWay}" IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Tarih" Binding="{Binding Tarih, StringFormat=\{0:dd.MM.yyyy\}}" Width="110"/>
+                        <DataGridTextColumn Header="Açıklama" Binding="{Binding Aciklama}" Width="2*"/>
+                        <DataGridTextColumn Header="Kategori" Binding="{Binding Kategori}" Width="120"/>
+                        <DataGridTextColumn Header="Tutar" Binding="{Binding Tutar, StringFormat='₺{0:#,##0.00}'}" Width="120"/>
+                        <DataGridTextColumn Header="Ödeme Tipi" Binding="{Binding OdemeTipi}" Width="110"/>
+                        <DataGridTextColumn Header="Tedarikçi" Binding="{Binding Tedarikci}" Width="140"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </DockPanel>
+        </TabItem>
+
+        <TabItem Header="Kasa Özeti">
+            <DockPanel LastChildFill="True">
+                <Border DockPanel.Dock="Top" Padding="10,8" Background="White">
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <TextBlock Text="Başlangıç:" VerticalAlignment="Center"/>
+                        <DatePicker SelectedDate="{Binding KasaBas, Mode=TwoWay}"/>
+                        <TextBlock Text="Bitiş:" VerticalAlignment="Center"/>
+                        <DatePicker SelectedDate="{Binding KasaBit, Mode=TwoWay}"/>
+                        <Button Content="Hesapla" Background="#2E86AB" Foreground="White" Command="{Binding LoadKasaOzetiCommand}"/>
+                    </StackPanel>
+                </Border>
+                <ItemsControl DockPanel.Dock="Top" Margin="10">
+                    <ItemsControl.ItemsPanel><ItemsPanelTemplate><UniformGrid Columns="3"/></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+                    <Border Background="White" Margin="4"><StackPanel Margin="15,10">
+                        <TextBlock Text="Toplam Gelir" Foreground="Gray" FontSize="11"/>
+                        <TextBlock Text="{Binding ToplamGelirText}" Foreground="#27AE60" FontSize="20" FontWeight="Bold"/>
+                    </StackPanel></Border>
+                    <Border Background="White" Margin="4"><StackPanel Margin="15,10">
+                        <TextBlock Text="Toplam Gider" Foreground="Gray" FontSize="11"/>
+                        <TextBlock Text="{Binding ToplamGiderText}" Foreground="#E74C3C" FontSize="20" FontWeight="Bold"/>
+                    </StackPanel></Border>
+                    <Border Background="White" Margin="4"><StackPanel Margin="15,10">
+                        <TextBlock Text="Net Bakiye" Foreground="Gray" FontSize="11"/>
+                        <TextBlock Text="{Binding NetBakiyeText}" Foreground="{Binding NetBrush}" FontSize="20" FontWeight="Bold"/>
+                    </StackPanel></Border>
+                </ItemsControl>
+                <DataGrid ItemsSource="{Binding KategoriOzetleri}" IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Kategori" Binding="{Binding Kategori}" Width="*"/>
+                        <DataGridTextColumn Header="Tutar" Binding="{Binding Tutar, StringFormat='₺{0:#,##0.00}'}" Width="200"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </DockPanel>
+        </TabItem>
+    </TabControl>
+</UserControl>

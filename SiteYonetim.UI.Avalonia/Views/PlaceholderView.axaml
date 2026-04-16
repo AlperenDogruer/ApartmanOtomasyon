@@ -1,0 +1,16 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:SiteYonetim.UI.Avalonia.ViewModels"
+             x:Class="SiteYonetim.UI.Avalonia.Views.PlaceholderView"
+             x:DataType="vm:PlaceholderViewModel">
+
+    <Border Background="White" CornerRadius="4" Padding="40">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="15">
+            <TextBlock Text="🚧" FontSize="64" HorizontalAlignment="Center"/>
+            <TextBlock Text="{Binding Title}" FontSize="24" FontWeight="Bold"
+                       Foreground="#1E3A5F" HorizontalAlignment="Center"/>
+            <TextBlock Text="{Binding Message}" FontSize="13" Foreground="Gray"
+                       TextAlignment="Center" TextWrapping="Wrap" MaxWidth="500"/>
+        </StackPanel>
+    </Border>
+</UserControl>

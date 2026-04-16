@@ -1,0 +1,26 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:SiteYonetim.UI.Avalonia.ViewModels.Dialogs"
+        x:Class="SiteYonetim.UI.Avalonia.Views.Dialogs.AidatTipiDialog"
+        x:DataType="vm:AidatTipiDialogViewModel"
+        Title="{Binding Baslik}" Width="420" Height="260" CanResize="False"
+        WindowStartupLocation="CenterOwner" Background="White">
+    <DockPanel LastChildFill="True">
+        <Border DockPanel.Dock="Top" Height="50" Background="#1E3A5F" Padding="15,10">
+            <TextBlock Text="{Binding Baslik}" Foreground="White" FontSize="16" FontWeight="Bold"/>
+        </Border>
+        <Border DockPanel.Dock="Bottom" Padding="15,10">
+            <Grid ColumnDefinitions="*,Auto,Auto">
+                <TextBlock Grid.Column="0" Text="{Binding Hata}" Foreground="#E74C3C" VerticalAlignment="Center"/>
+                <Button Grid.Column="1" Content="İptal" Width="80" Margin="0,0,8,0" Command="{Binding IptalCommand}"/>
+                <Button Grid.Column="2" Content="Kaydet" Width="100" Background="#2E86AB" Foreground="White" FontWeight="Bold" Command="{Binding KaydetCommand}"/>
+            </Grid>
+        </Border>
+        <StackPanel Margin="20" Spacing="10">
+            <TextBlock Text="Ad:" FontWeight="Bold" Foreground="#1E3A5F"/>
+            <TextBox Text="{Binding Ad, Mode=TwoWay}"/>
+            <TextBlock Text="Açıklama:" FontWeight="Bold" Foreground="#1E3A5F" Margin="0,5,0,0"/>
+            <TextBox Text="{Binding Aciklama, Mode=TwoWay}"/>
+        </StackPanel>
+    </DockPanel>
+</Window>

@@ -1,0 +1,50 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:SiteYonetim.UI.Avalonia.ViewModels"
+             x:Class="SiteYonetim.UI.Avalonia.Views.RaporlarView"
+             x:DataType="vm:RaporlarViewModel">
+
+    <Grid ColumnDefinitions="230,*">
+        <ListBox Grid.Column="0" ItemsSource="{Binding RaporList}" SelectedIndex="{Binding SelectedRaporIndex, Mode=TwoWay}"
+                 Background="White" FontSize="13"/>
+
+        <DockPanel Grid.Column="1" Margin="10,0,0,0" LastChildFill="True">
+            <Border DockPanel.Dock="Top" Padding="10" Background="White">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" Spacing="8" IsVisible="{Binding BorcluParamsVisible}">
+                        <TextBlock Text="Yıl:" VerticalAlignment="Center"/>
+                        <NumericUpDown Value="{Binding Yil, Mode=TwoWay}" Minimum="2020" Maximum="2050" Width="100"/>
+                        <TextBlock Text="Ay:" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                        <ComboBox ItemsSource="{Binding AylarList}" SelectedIndex="{Binding AyIndex, Mode=TwoWay}" Width="120"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Spacing="8" IsVisible="{Binding EkstreParamsVisible}">
+                        <TextBlock Text="Daire:" VerticalAlignment="Center"/>
+                        <ComboBox ItemsSource="{Binding Daireler}" SelectedItem="{Binding SelectedDaire, Mode=TwoWay}" Width="240"/>
+                        <TextBlock Text="Baş:" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                        <DatePicker SelectedDate="{Binding Bas, Mode=TwoWay}"/>
+                        <TextBlock Text="Bit:" VerticalAlignment="Center"/>
+                        <DatePicker SelectedDate="{Binding Bit, Mode=TwoWay}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Spacing="8" IsVisible="{Binding MizanParamsVisible}">
+                        <TextBlock Text="Yıl:" VerticalAlignment="Center"/>
+                        <NumericUpDown Value="{Binding Yil, Mode=TwoWay}" Minimum="2020" Maximum="2050" Width="100"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Spacing="8" IsVisible="{Binding GelirGiderParamsVisible}">
+                        <TextBlock Text="Başlangıç:" VerticalAlignment="Center"/>
+                        <DatePicker SelectedDate="{Binding Bas, Mode=TwoWay}"/>
+                        <TextBlock Text="Bitiş:" VerticalAlignment="Center"/>
+                        <DatePicker SelectedDate="{Binding Bit, Mode=TwoWay}"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+            <Border DockPanel.Dock="Bottom" Padding="10" Background="White">
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <Button Content="Önizle" Background="#2E86AB" Foreground="White" Command="{Binding OnizleCommand}"/>
+                    <Button Content="PDF İndir" Background="#E74C3C" Foreground="White" Command="{Binding PdfCommand}"/>
+                    <Button Content="Excel İndir" Background="#27AE60" Foreground="White" Command="{Binding ExcelCommand}"/>
+                </StackPanel>
+            </Border>
+            <DataGrid ItemsSource="{Binding PreviewData}" IsReadOnly="True" AutoGenerateColumns="True"/>
+        </DockPanel>
+    </Grid>
+</UserControl>

@@ -1,0 +1,29 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:SiteYonetim.UI.Avalonia.ViewModels.Dialogs"
+        x:Class="SiteYonetim.UI.Avalonia.Views.Dialogs.CikisTarihiDialog"
+        x:DataType="vm:CikisTarihiDialogViewModel"
+        Title="Çıkış Tarihi Belirle" Width="420" Height="260" CanResize="False"
+        WindowStartupLocation="CenterOwner" Background="White">
+    <DockPanel>
+        <Border DockPanel.Dock="Top" Height="50" Background="#1E3A5F" Padding="15,10">
+            <TextBlock Text="Sakin Çıkış İşlemleri" Foreground="White" FontSize="16" FontWeight="Bold"/>
+        </Border>
+        <Border DockPanel.Dock="Bottom" Padding="15,10">
+            <Grid ColumnDefinitions="*,Auto,Auto">
+                <Button Grid.Column="1" Content="İptal" Width="80" Margin="0,0,8,0" Command="{Binding IptalCommand}"/>
+                <Button Grid.Column="2" Content="Onayla" Width="100" Background="#2E86AB" Foreground="White" FontWeight="Bold" Command="{Binding OnaylaCommand}"/>
+            </Grid>
+        </Border>
+        <StackPanel Margin="20" Spacing="15">
+            <StackPanel Orientation="Horizontal" Spacing="10">
+                <TextBlock Text="Sakin:" FontWeight="Bold" Foreground="#1E3A5F"/>
+                <TextBlock Text="{Binding SakinAdSoyad}" FontWeight="Bold"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Spacing="10">
+                <TextBlock Text="Çıkış Tarihi:" FontWeight="Bold" Foreground="#1E3A5F" VerticalAlignment="Center"/>
+                <DatePicker SelectedDate="{Binding CikisTarihi, Mode=TwoWay}"/>
+            </StackPanel>
+        </StackPanel>
+    </DockPanel>
+</Window>

@@ -1,0 +1,38 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:SiteYonetim.UI.Avalonia.ViewModels.Dialogs"
+        x:Class="SiteYonetim.UI.Avalonia.Views.Dialogs.DaireEkleDialog"
+        x:DataType="vm:DaireEkleDialogViewModel"
+        Title="{Binding Baslik}" Width="460" Height="440" CanResize="False"
+        WindowStartupLocation="CenterOwner" Background="White">
+    <DockPanel>
+        <Border DockPanel.Dock="Top" Height="50" Background="#1E3A5F" Padding="15,10">
+            <TextBlock Text="{Binding Baslik}" Foreground="White" FontSize="16" FontWeight="Bold"/>
+        </Border>
+        <Border DockPanel.Dock="Bottom" Padding="15,10">
+            <Grid ColumnDefinitions="*,Auto,Auto">
+                <TextBlock Grid.Column="0" Text="{Binding Hata}" Foreground="#E74C3C" VerticalAlignment="Center"/>
+                <Button Grid.Column="1" Content="İptal" Width="80" Margin="0,0,8,0" Command="{Binding IptalCommand}"/>
+                <Button Grid.Column="2" Content="Kaydet" Width="100" Background="#2E86AB" Foreground="White" FontWeight="Bold" Command="{Binding KaydetCommand}"/>
+            </Grid>
+        </Border>
+        <Grid Margin="20" ColumnDefinitions="120,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto">
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="Blok:" FontWeight="Bold" Foreground="#1E3A5F" VerticalAlignment="Center" Margin="0,5"/>
+            <ComboBox Grid.Row="0" Grid.Column="1" ItemsSource="{Binding Bloklar}" SelectedItem="{Binding SelectedBlok, Mode=TwoWay}" HorizontalAlignment="Stretch" Margin="0,5">
+                <ComboBox.ItemTemplate><DataTemplate><TextBlock Text="{Binding Ad}"/></DataTemplate></ComboBox.ItemTemplate>
+            </ComboBox>
+
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="Daire No:" FontWeight="Bold" Foreground="#1E3A5F" VerticalAlignment="Center" Margin="0,5"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding DaireNo, Mode=TwoWay}" Margin="0,5"/>
+
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="Kat:" FontWeight="Bold" Foreground="#1E3A5F" VerticalAlignment="Center" Margin="0,5"/>
+            <NumericUpDown Grid.Row="2" Grid.Column="1" Value="{Binding Kat, Mode=TwoWay}" Minimum="-5" Maximum="100" Margin="0,5"/>
+
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="Arsa Payı:" FontWeight="Bold" Foreground="#1E3A5F" VerticalAlignment="Center" Margin="0,5"/>
+            <NumericUpDown Grid.Row="3" Grid.Column="1" Value="{Binding ArsaPayi, Mode=TwoWay}" Minimum="0" Maximum="10000" Margin="0,5"/>
+
+            <TextBlock Grid.Row="4" Grid.Column="0" Text="Tip:" FontWeight="Bold" Foreground="#1E3A5F" VerticalAlignment="Center" Margin="0,5"/>
+            <ComboBox Grid.Row="4" Grid.Column="1" ItemsSource="{Binding Tipler}" SelectedItem="{Binding SelectedTip, Mode=TwoWay}" HorizontalAlignment="Stretch" Margin="0,5"/>
+        </Grid>
+    </DockPanel>
+</Window>
