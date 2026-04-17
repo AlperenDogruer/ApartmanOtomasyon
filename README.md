@@ -12,14 +12,22 @@ Yerel (offline), tek kullanıcılı Site Yönetim Otomasyon masaüstü uygulamas
 - PdfSharpCore (PDF export)
 - EPPlus (Excel export)
 
-## Gereksinimler
+## Son Kullanıcı Kurulumu
+
+Hiçbir ek yazılım gerekmez. Installer her şeyi içerir.
+
+- **Windows**: `SiteYonetimSetup_Windows_v1.0.0.exe` dosyasını çalıştır → İleri → Kur → Bitti
+- **macOS (Apple Silicon)**: `SiteYonetim_macOS_AppleSilicon_v1.0.0.zip` aç → uygulamayı Applications'a sürükle
+- **macOS (Intel)**: `SiteYonetim_macOS_Intel_v1.0.0.zip` aç → uygulamayı Applications'a sürükle
+
+## Geliştirici Kurulumu
+
+### Gereksinimler
 
 - [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
 - macOS 11+ (Intel veya Apple Silicon), Windows 10/11 veya modern Linux
 
-## Kurulum ve Çalıştırma
-
-### Cross-platform (macOS, Windows, Linux — önerilen)
+### Kaynak Koddan Çalıştırma
 
 ```bash
 # Projeyi derle
@@ -27,6 +35,26 @@ dotnet build
 
 # Avalonia UI uygulamasını çalıştır
 dotnet run --project SiteYonetim.UI.Avalonia
+```
+
+### Dağıtım Paketi Oluşturma
+
+**Windows:**
+```bash
+# 1. Self-contained exe oluştur
+publish-windows.bat
+
+# 2. Inno Setup ile installer derle (https://jrsoftware.org/isinfo.php)
+#    setup.iss dosyasını Inno Setup ile aç ve derle
+#    Çıktı: installer_output/SiteYonetimSetup_Windows_v1.0.0.exe
+```
+
+**macOS (Mac üzerinde çalıştır):**
+```bash
+chmod +x publish-mac.sh
+./publish-mac.sh
+# Çıktı: installer_output/SiteYonetim_macOS_AppleSilicon_v1.0.0.zip
+# Çıktı: installer_output/SiteYonetim_macOS_Intel_v1.0.0.zip
 ```
 
 ### Windows (eski WinForms sürümü)
